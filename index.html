@@ -1,0 +1,50 @@
+<!-- Adriano Siqueira - 8/1/2021 - Search and Filter People -->
+
+<!DOCTYPE html>
+<html lang="en" ng-app="LeaderFilterApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search and Filter People</title>
+
+    <!--AngularJS import  -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+    <!-- index.js import -->
+    <script type="text/javascript" src="./assets/js/app.js"></script>
+
+    <!-- Bootstrap import -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+
+    <!-- style.css import -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+<body ng-controller="LeaderFilterController">
+    <h1>Example #7</h1>
+    <h1>Search and Filter</h1>
+    <hr>    
+    <!-- Search Box and Counter -->
+    <input type="text" placeholder="Search" ng-model="search">
+    <span>{{(leaders | filter:search).length}} of {{leaders.length}}</span>
+
+    <hr>    
+    <!-- Show All -->
+    <div>
+        <span ng-repeat="leader in leaders | filter:search">
+            <img src="{{leader.pic}}">
+        </span>
+    </div>
+
+    <hr>
+    <!-- Guessing the leader -->
+    <div class="bottom-line" ng-if="(leaders | filter:search).length < 4">
+        <span ng-repeat="leader in leaders | filter:search | limitTo:1">
+            <span>Looking for:</span>
+            <img src="{{leader.pic}}">
+            <span>{{leader.name}}</span>
+        </span>
+    </div>
+        
+</body>
+</html>
